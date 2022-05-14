@@ -128,7 +128,13 @@ To add a CA or generate a certificate, you can manually edit this file and resta
 - `GET /api/ca` - return a list of all CA
 - `GET /api/ca/{name}` - return details of the named CA
 - `POST /api/ca/{signingCaName}` - create a new CA and sign the cert with `signingCaName` CA
-  - 
+- `POST /api/cert/{signingCaName}` - generate a certificate signed by the `signingCaName` CA
+- `DELETE /api/cert/{signingCaName}/{certName}` - revoke a certificate
+- `GET /api/cert/{caName}/keystore` - download keystore (it has the private key of the certificate and the chain certificates)
+- `GET /api/cert/{caName}/truststore` - download truststore (it only contains the root CA cert)
+
+### Post data to create a new CA
+
 ```json
 {
   "name": "inter1b",
@@ -140,10 +146,16 @@ To add a CA or generate a certificate, you can manually edit this file and resta
   "keyUsage": "digitalSignature,keyEncipherment"
 }
 ```
-- `POST /api/cert/{signingCaName}` - generate a certificate signed by the `signingCaName` CA
-- `DELETE /api/cert/{signingCaName}/{certName}` - revoke a certificate
-- `GET /api/cert/{caName}/keystore` - download keystore (it has the private key of the certificate and the chain certificates)
-- `GET /api/cert/{caName}/truststore` - download truststore (it only contains the root CA cert)
+
+### Post data to generate a new certificate
+
+```json
+{
+  "name": "client4",
+  "keySize": 4096,
+  "subject": "/C=US/ST=Claifornia/L=San Francisco/O=Youramaryllis/CN=client4"
+}
+```
 
 ## CRL
 
