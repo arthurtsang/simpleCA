@@ -1,0 +1,9 @@
+server:
+  port: 4000
+simpleca:
+  hostname: localhost
+  caPath: ./myca
+  opensslPath: /usr/bin
+  defaultPassword: changeit
+  recreate: false
+  ocspPort: 5000

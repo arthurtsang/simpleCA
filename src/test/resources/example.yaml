@@ -1,0 +1,88 @@
+simpleca:
+  rootca:
+    name: "rootca"
+    keySize: 2048
+    days: 1826
+    subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Root CA"
+    relativePath: "rootca"
+    pathLenConstraint: 2
+    caConstraint: true
+    clientAuth: false
+    password: "changeit"
+    ca:
+    - name: "inter1"
+      keySize: 2048
+      days: 1826
+      subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter1 CA"
+      relativePath: "inter1"
+      caConstraint: true
+      clientAuth: false
+      keyUsage: "digitalSignature,keyEncipherment,cRLSign,keyCertSign"
+      password: "changeit"
+      signingCAName: "rootca"
+      ca:
+      - name: "inter1a"
+        keySize: 8192
+        days: 1826
+        subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter1a CA"
+        relativePath: "inter1a"
+        caConstraint: false
+        clientAuth: true
+        keyUsage: "digitalSignature,keyEncipherment"
+        password: "changeit"
+        signingCAName: "inter1"
+        subjectAltName:
+        - "DNS.0 = localhost"
+        - "IP.0 = 127.0.0.1"
+        certs:
+        - name: "server"
+          keySize: 2048
+          subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=server"
+          password: "changeit"
+          revoked: false
+          relativePath: "server"
+        - name: "client1"
+          keySize: 2048
+          subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=client1"
+          password: "changeit"
+          revoked: false
+          relativePath: "client1"
+        - name: "client2"
+          keySize: 2048
+          subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=client2"
+          password: "changeit"
+          revoked: true
+          relativePath: "client2"
+      - name: "inter1d"
+        keySize: 8192
+        days: 1826
+        subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter1d CA"
+        relativePath: "inter1d"
+        caConstraint: false
+        clientAuth: true
+        keyUsage: "digitalSignature,keyEncipherment"
+        password: "changeit"
+        signingCAName: "inter1"
+        certs:
+        - name: "client3"
+          keySize: 2048
+          subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=client3"
+          password: "changeit"
+          revoked: false
+          relativePath: "client3"
+        - name: "client4"
+          keySize: 2048
+          subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=client4"
+          password: "changeit"
+          revoked: false
+          relativePath: "client4"
+    - name: "inter2"
+      keySize: 2048
+      days: 1826
+      subject: "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter2 CA"
+      relativePath: "inter2"
+      caConstraint: false
+      clientAuth: false
+      keyUsage: "digitalSignature,keyEncipherment"
+      password: "changeit"
+      signingCAName: "rootca"

@@ -1,0 +1,49 @@
+simpleca:
+  rootca:
+    relativePath: rootca
+    keySize: 2048
+    days: 1826
+    pathLenConstraint: 2
+    caConstraint: true
+    subject: /C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Root CA
+    ca:
+      - name: inter1
+        relativePath: inter1
+        keysize: 2048
+        days: 1826
+        subject: /C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter1 CA
+        caConstraint: true
+        keyUsage: digitalSignature,keyEncipherment,cRLSign,keyCertSign
+        ca:
+          - name: inter1a
+            relativePath: inter1a
+            keySize: 8192
+            days: 1826
+            caConstraint: false
+            clientAuth: true
+            subjectAltName:
+              - DNS.0 = localhost
+              - IP.0 = 127.0.0.1
+            subject: /C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter1a CA
+            keyUsage: digitalSignature,keyEncipherment
+            certs:
+              - name: server
+                keySize: 2048
+                subject: /C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=server
+                relativePath: server
+              - name: client1
+                keySize: 2048
+                subject: /C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=client1
+                relativePath: client1
+              - name: client2
+                keySize: 2048
+                subject: /C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=client2
+                revoked: true
+                relativePath: client2
+      - name: inter2
+        relativePath: inter2
+        keysize: 2048
+        days: 1826
+        subject: /C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter2 CA
+        caConstraint: false
+        keyUsage: digitalSignature,keyEncipherment

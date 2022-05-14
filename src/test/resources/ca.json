@@ -1,0 +1,9 @@
+{
+  "name": "inter1b",
+  "keySize": 8192,
+  "days": 1826,
+  "caConstraint": false,
+  "clientAuth": true,
+  "subject": "/C=US/ST=California/L=San Francisco/O=Youramaryllis/CN=Inter1b CA",
+  "keyUsage": "digitalSignature,keyEncipherment"
+}
